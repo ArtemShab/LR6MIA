@@ -25,19 +25,3 @@ jobs:
 
       - name: Run Unit Tests (xUnit)
         run: dotnet test --no-build --configuration Release --verbosity normal
-
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Railway CLI
-        run: npm i -g @railway/cli
-
-      - name: Deploy to Railway
-        working-directory: ./LR4Premium Dry Cleaning and Laundry
-        run: railway up --service ${{ secrets.RAILWAY_SERVICE_ID }} -d
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
